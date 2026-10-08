@@ -2,8 +2,9 @@ cff-version: 1.2.0
 message: "Si usás este sitio o sus datos, citalo así."
 type: software
 title: "Las bibliotecas de las misiones jesuíticas de la Sudamérica hispánica (1767–1768)"
-version: "1.0"
+version: "1.0.1"
 date-released: 2026-10-08
+doi: 10.5281/zenodo.23245826
 authors:
   - family-names: Vega
     given-names: Fabián R.

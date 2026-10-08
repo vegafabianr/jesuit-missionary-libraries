@@ -21,7 +21,7 @@ Sitio: https://vegafabianr.github.io/jesuit-missionary-libraries/
 
 ## Cómo citar
 
-Vega, Fabián R. (2026). *Las bibliotecas de las misiones jesuíticas de la Sudamérica hispánica (1767–1768)* [sitio web, versión 1.0]. GitHub. https://github.com/vegafabianr/jesuit-missionary-libraries. DOI: pendiente.
+Vega, Fabián R. (2026). *Las bibliotecas de las misiones jesuíticas de la Sudamérica hispánica (1767–1768)* [sitio web, versión 1.0.1]. GitHub. https://github.com/vegafabianr/jesuit-missionary-libraries. https://doi.org/10.5281/zenodo.23245826
 
 ## Licencias
 
