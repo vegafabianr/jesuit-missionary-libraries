@@ -1,0 +1,21 @@
+{
+  "title": "Las bibliotecas de las misiones jesuíticas de la Sudamérica hispánica (1767–1768)",
+  "upload_type": "software",
+  "description": "Interactive visualization of the library inventories of 74 Jesuit missions in Spanish South America, drawn up after the expulsion of the Society of Jesus (1767–1768), with the transcribed inventories and the data in CSV. This project has received funding from the European Union's Horizon Europe research and innovation programme under the Marie Skłodowska-Curie grant agreement No. 101200600 (JesLibSouth).",
+  "creators": [
+    {
+      "name": "Vega, Fabián R.",
+      "affiliation": "Departamento de Historia Moderna y Contemporánea, Universidad Complutense de Madrid",
+      "orcid": "0000-0003-4133-5053"
+    }
+  ],
+  "license": "mit",
+  "language": "spa",
+  "keywords": [
+    "Jesuit missions",
+    "libraries",
+    "inventories",
+    "South America",
+    "data visualization"
+  ]
+}
