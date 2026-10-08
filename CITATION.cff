@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "Si usás este sitio o sus datos, citalo así."
+type: software
+title: "Las bibliotecas de las misiones jesuíticas de la Sudamérica hispánica (1767–1768)"
+version: "1.0"
+date-released: 2026-10-08
+authors:
+  - family-names: Vega
+    given-names: Fabián R.
+    affiliation: "Departamento de Historia Moderna y Contemporánea, Universidad Complutense de Madrid"
+    orcid: "https://orcid.org/0000-0003-4133-5053"
+repository-code: "https://github.com/vegafabianr/jesuit-missionary-libraries"
+url: "https://vegafabianr.github.io/jesuit-missionary-libraries/"
+license:
+  - MIT
+  - CC-BY-4.0
+keywords:
+  - Jesuit missions
+  - libraries
+  - inventories
+  - South America
+  - data visualization
