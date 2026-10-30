@@ -814,6 +814,29 @@
   :is(.pildoras button, .tip, #minimapa-tip, #reset, .flecha-boton, .tabla td.n .barra) { border-radius: var(--radio); }
   /* Grillas: solo las que ya tenían los gráficos (gráficos despojados: no se agregan donde no había), en guiones como los filetes, muy apagadas */
   svg line[stroke="var(--tenue)"] { stroke: var(--linea); stroke-opacity: .25; stroke-dasharray: 6 4; }
+  /* ---------- Celular (2026-10-30, revisión en el teléfono) ----------
+     Portada: aire entre la fecha y la intro, el filete pasa arriba de la intro (horizontal) y la flecha va debajo del texto, no encima.
+     Inicio y Registros: sin título vertical; cada tarjeta es un bloque centrado (nombre, adelanto, texto y «+» juntos). */
+  .portada .flecha-boton { cursor: pointer; border: 0; font: inherit; color: var(--bg); }
+  @media (max-width: 760px) {
+    .portada .rejilla { row-gap: 36px; }
+    .portada .intro { border-left: 0; padding: 28px 0 0; background-image: repeating-linear-gradient(90deg, var(--gc) 0 6px, transparent 6px 10px);
+      background-size: 100% 1.5px; background-position: left top; }
+    .portada .flecha { position: static; transform: none; text-align: center; margin-top: 36px; }
+    .portada .flecha-boton { width: 40px; height: 40px; font-size: 20px; }
+    :root[data-explorar="costado"] .indice { display: block; }
+    .indice .tit { display: none; }
+    #v-inicio .mirada, #reg-elegir .mirada { justify-content: center; gap: 18px; padding: 0 20px; }
+    .mirada .desc { flex: none; max-width: 340px; text-align: center; }
+    .mirada .ventana { max-width: 340px; }
+    body[data-sub=""] #reg-elegir, body:not([data-sub]) #reg-elegir { display: block; min-height: 0; padding: 72px 0 48px; }
+    #reg-elegir .miradas { gap: 56px; }
+    /* Título de sección: un titulito fijo arriba, como en la versión anterior (el estilo nuevo lo agrandaba y desbordaba la pantalla) */
+    .rotulo h2 { font-size: 20px; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+                 height: 48px; box-sizing: border-box; padding: 0; line-height: 46px; }  /* 48 px: lo que el imán y los gráficos le reservan (ALTO_ROTULO_MOVIL) */
+    /* Títulos de los gráficos más chicos, como en la versión anterior: en 22 px ocupaban tres renglones y le quitaban lugar al gráfico */
+    .frase { font-size: 17px; }
+  }
 </style>
 </head>
 <body>
@@ -841,7 +864,7 @@
         <p>Aunque no representan de forma exhaustiva la realidad (los manuscritos están subrepresentados y la ausencia de un título en las listas no implica necesariamente su ausencia en las bibliotecas), dibujan un mapa revelador de los libros y las tendencias intelectuales que llegaron a los confines del imperio español.</p>
       </div>
     </div>
-    <div class="flecha" aria-hidden="true"><span class="flecha-boton">↓</span></div>
+    <div class="flecha"><button type="button" class="flecha-boton" aria-label="Bajar al índice" onclick="Recorrido.irA(document.querySelector(&quot;#v-inicio .indice&quot;))">↓</button></div>
   </header>
 
   <!-- Índice: tres maneras de entrar a los datos, cada una con un adelanto dibujado con los datos -->
@@ -2663,7 +2686,7 @@ const fmtPct = (v, d = 0) => d3.format(`.${d}%`)(v).replace(".", ",");
   function fijarEscala(R) {
     const nMax = d3.max(["abs", "pct"], m => d3.max(calcular(m, libros), d => d.n));
     const sector = 2 * Math.PI / TOPICOS.length, pad = 0.045, ang = sector - 2 * pad;
-    const r0 = R * 0.3, rMax = R - 30;  // lugar para las etiquetas curvas
+    const r0 = R * 0.3, rMax = R - (R < 250 ? 44 : 30);  // lugar para las etiquetas curvas (en el celular, dos alturas: ver abajo)
     for (let h = R * 0.06; h > 3; h -= 0.25) {
       const w = Math.max(1.4, h * 0.2), paso = w * 1.55, sep = Math.max(1.5, h * 0.18);
       let r = r0, quedan = nMax;
@@ -2719,11 +2742,12 @@ const fmtPct = (v, d = 0) => d3.format(`.${d}%`)(v).replace(".", ",");
     /* Todas las etiquetas a la misma altura, fija: afuera del pétalo más largo sin filtros. Al filtrar
        solo se achican los pétalos; las etiquetas no se mueven ni se pisan */
     const rEtq = escala.rFin + 8;
-    etiquetas.forEach(d => d.r = rEtq);
+    // En el celular los arcos son cortos y los nombres largos se pisan: uno de cada dos va un renglón más afuera
+    etiquetas.forEach((d, i) => d.r = rEtq + (S < 500 && i % 2 ? 13 : 0));
     // Etiquetas curvas: el nombre corto de cada tópico sigue el arco, justo afuera de su pétalo.
     // En la mitad de abajo el arco va al revés, para que el texto no quede cabeza abajo.
     const valorTxt = d => Seccion2.medida === "abs" ? num(d.valor) : fmtPct(d.pct, 1);
-    const fs = S < 500 ? 11.5 : 14.5;
+    const fs = S < 500 ? 10.5 : 14.5;  // en el celular, 10,5: con Plus Jakarta (más ancha) los nombres vecinos se pisaban
     const abajo = d => d.a > Math.PI / 2 && d.a < 3 * Math.PI / 2;
     const punto = (r, a) => `${r * Math.sin(a)},${-r * Math.cos(a)}`;
     // El arco se alarga a los dos lados del pétalo (el texto sigue centrado en él): si el nombre es más
@@ -5497,11 +5521,14 @@ function rutaActual() {
 }
 /* Al ir a una explicación y volver, la vista anterior recupera la pantalla donde estaba. */
 let vistaAnterior = null;
+// La dirección completa de la vista anterior (con su subpágina: «Volver» desde una explicación regresa a la lectura, no al índice de Registros)
+let rutaAnterior = null, rutaVigente = null;
 const posiciones = new Map();
 function mostrarVista() {
   const { vista, sub, resto } = rutaActual();
   const previa = document.body.dataset.vista;
-  if (previa && previa !== vista) { posiciones.set(previa, window.scrollY); vistaAnterior = previa; }
+  if (previa && previa !== vista) { posiciones.set(previa, window.scrollY); vistaAnterior = previa; rutaAnterior = rutaVigente; }
+  rutaVigente = location.hash || "#/inicio";
   document.querySelectorAll(".vista").forEach(el => el.classList.toggle("activa", el.id === "v-" + vista));
   document.body.dataset.vista = vista;
   // Registros tiene sus propias páginas: elegir (vacío), tabla y lectura
@@ -5888,7 +5915,7 @@ function explicar(clave, mismaPagina = false) {
   if (!mismaPagina) atipicosExplica = Seccion1.conAtipicos;
   const cont = d3.select("#explicacion");
   // Volver: a la vista y la pantalla de donde se vino (si se entró directo, al recorrido)
-  const volver = `<a class="volver" href="#/${vistaAnterior && vistaAnterior !== "explica" ? vistaAnterior : "recorrido"}"><span class="cuadro">←</span>Volver</a>`;
+  const volver = `<a class="volver" href="${vistaAnterior && vistaAnterior !== "explica" ? rutaAnterior ?? "#/" + vistaAnterior : "#/recorrido"}"><span class="cuadro">←</span>Volver</a>`;
   const f = (n, d = 0) => d3.format(`,.${d}f`)(n).replace(/,/g, " ").replace(".", ",");
   const frac = (a, b) => `<span class="frac"><span>${a}</span><span>${b}</span></span>`;
   const suma = abajo => `<span class="suma"><span class="s">Σ</span><small>${abajo}</small></span>`;
