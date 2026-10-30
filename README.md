@@ -31,6 +31,14 @@ Vega, Fabián R. (2026). *Las bibliotecas de las misiones jesuíticas de la Suda
 - Los logos de la Unión Europea y de la Universidad Complutense de Madrid pertenecen a sus titulares.
 - D3 (https://d3js.org) va incrustado en `index.html` bajo su propia licencia ISC.
 
+## Créditos
+
+- **Investigación, documentación, transcripción de los inventarios y desarrollo de la visualización:** Fabián R. Vega.
+
+- 
+
+- **Diseño de las tipografías y de la paleta de colores:** M. Matilde Rodríguez (https://github.com/MMatildeR).
+
 ## Financiación
 
 Este proyecto ha recibido financiación del programa de investigación e innovación Horizonte Europa de la Unión Europea en virtud del acuerdo de subvención Marie Skłodowska-Curie n.º 101200600, JesLibSouth: *Books in the Borderlands of the Iberian Worlds: Jesuit Libraries and Cultural Transformation in South America (17th and 18th Centuries)*.
