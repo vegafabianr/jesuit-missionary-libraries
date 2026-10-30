@@ -35,8 +35,6 @@ Vega, Fabián R. (2026). *Las bibliotecas de las misiones jesuíticas de la Suda
 
 - **Investigación, documentación, transcripción de los inventarios y desarrollo de la visualización:** Fabián R. Vega.
 
-- 
-
 - **Diseño de las tipografías y de la paleta de colores:** M. Matilde Rodríguez (https://github.com/MMatildeR).
 
 ## Financiación
