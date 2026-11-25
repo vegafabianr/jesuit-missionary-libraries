@@ -4,7 +4,7 @@ Visualización interactiva de los inventarios de las bibliotecas de 74 misiones 
 
 *Interactive visualization of the library inventories of 74 Jesuit missions in Spanish South America, drawn up after the expulsion of the Society of Jesus (1767–1768). The site is in Spanish; the data files use English column names.*
 
-Sitio: https://vegafabianr.github.io/jesuit-missionary-libraries/
+**[Ver el sitio →](https://vegafabianr.github.io/jesuit-missionary-libraries/)**
 
 ## Contenido
 
